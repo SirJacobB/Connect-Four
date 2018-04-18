@@ -37,7 +37,7 @@ public class Game extends Application{
 			Disc disc = new Disc(b);	//TODO
 
 			master.get(i).add(disc);
-			disc.setTranslateX(i*WORLD_WIDTH/7);
+			disc.setTranslateX(i*WORLD_WIDTH/7+WORLD_WIDTH/14);
 			disc.setTranslateY(WORLD_HEIGHT - ((master.get(i).size())*WORLD_HEIGHT/6));
 			root.getChildren().add(disc);	//TODO
 		}
