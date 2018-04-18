@@ -11,7 +11,7 @@ public class Game extends Application{
 	public static double WORLD_WIDTH = 1200;
 	public static double WORLD_HEIGHT = 800;
 
-	public static ArrayList<Disc[]> master = new ArrayList<>();
+	public static ArrayList<ArrayList<Disc>> master = new ArrayList<>();
 
 	private static Group root = new Group();
 	private static Group discs = new Group();
@@ -31,38 +31,17 @@ public class Game extends Application{
 	}
 
 	public static void spawnDisc(int i) {
-		boolean b = true;
-		Disc disc = new Disc(b);	//TODO
+		if(master.get(i).size() < 6){
+			
+			boolean b = true;
+			Disc disc = new Disc(b);	//TODO
 
-		int counter = 0;
-		while(moveDown(counter, i)) {
-			counter++;
+			master.get(i).add(disc);
+			disc.setTranslateX(i*WORLD_WIDTH/7);
+			disc.setTranslateY(WORLD_HEIGHT - ((master.get(i).size())*WORLD_HEIGHT/6));
+			root.getChildren().add(disc);	//TODO
 		}
-		System.out.println(counter);
-		master.get(counter)[i] = disc;
-		disc.setTranslateX(i*WORLD_WIDTH/7);
-		disc.setTranslateY(counter*WORLD_HEIGHT/6);
-		discs.getChildren().add(disc);	//TODO
-		
-		for (int j = 0; j < master.size(); j++) {
-			for (int j2 = 0; j2 < master.get(j).length; j2++) {
 
-				System.out.println(master.get(j)[j2]);
-			}
-		}
-	}
-
-	private static boolean moveDown(int row, int column) {
-		if(row == 5) {
-			return false;
-		}
-		else if (master.get(row)[column] == null){
-			System.out.println(master.get(row)[column]);
-			return true;
-		}else {
-			System.out.println("usch");
-			return false;
-		}
 	}
 
 	private void setupGrid() {
@@ -74,7 +53,7 @@ public class Game extends Application{
 
 	private void createArrays() {
 		for (int i = 0; i < 6; i++) {
-			Disc[] array = {null, null, null, null, null, null, null};
+			ArrayList<Disc> array = new ArrayList<>();
 			master.add(array);
 		}	
 	}
