@@ -1,5 +1,6 @@
 package Client;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 import javafx.application.Application;
@@ -50,6 +51,7 @@ public class Game extends Application{
 			}else {
 				turnTest = true;
 			}
+			checkVertical();
 		});
 		return turnTest;
 	}
@@ -71,9 +73,22 @@ public class Game extends Application{
 
 	private void createArrays() {
 		for (int i = 0; i < 6; i++) {
-			ArrayList<Disc> array = new ArrayList<>();
-			master.add(array);
+			ArrayList<Disc> arrayL = new ArrayList<>();
+			master.add(arrayL);
 		}	
+	}
+
+	private static void checkVertical() {
+		for (int i = 0; i < master.size(); i++) {
+			for (int j = 0; j < 6; j++) {
+				if(master.get(i).get(j).getPlayer() == 1) {
+					System.out.println("yellow");
+				}
+				else if(master.get(i).get(j).getPlayer() == 0) {
+					System.out.println("red");
+				}
+			}	
+		}
 	}
 
 	public static void main(String[] args) {
