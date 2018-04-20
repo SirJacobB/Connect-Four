@@ -8,7 +8,7 @@ public class Disc extends Circle{
 	public Disc(boolean turn) {
 		this.setRadius(25);
 		if(turn) {
-			this.setFill(Color.BLACK);
+			this.setFill(Color.YELLOW);
 		}else {
 			this.setFill(Color.RED);
 		}

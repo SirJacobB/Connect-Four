@@ -30,18 +30,24 @@ public class Game extends Application{
 		primaryStage.show();
 	}
 
-	public static void spawnDisc(int i) {
-		if(master.get(i).size() < 6){
-			
-			boolean b = true;
-			Disc disc = new Disc(b);	//TODO
 
+
+	public static void createDisc(int i, boolean turn) {
+		if(master.get(i).size() < 6){
+			Disc disc = new Disc(turn);
 			master.get(i).add(disc);
 			disc.setTranslateX(i*WORLD_WIDTH/7+WORLD_WIDTH/14);
 			disc.setTranslateY(WORLD_HEIGHT - ((master.get(i).size())*WORLD_HEIGHT/6));
 			root.getChildren().add(disc);	//TODO
 		}
+	}
 
+	public static void spawnDisc(int i, boolean turn) {
+		if(turn) {
+			createDisc(i, true);
+		}else {
+			createDisc(i, false);
+		}	
 	}
 
 	private void setupGrid() {
