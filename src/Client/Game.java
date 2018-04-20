@@ -16,8 +16,8 @@ public class Game extends Application{
 	private static Group root = new Group();
 	private static Group discs = new Group();
 	private Scene scene = new Scene(root, WORLD_WIDTH, WORLD_HEIGHT);
-	
-	private static boolean turnTest = true;
+
+	private static boolean turnTest;
 
 	@Override
 	public void start(Stage primaryStage) throws Exception {
@@ -27,7 +27,8 @@ public class Game extends Application{
 
 		createArrays();
 		setupGrid();
-		
+		isTurn();
+
 		primaryStage.setScene(scene);	
 		primaryStage.show();
 	}
@@ -41,9 +42,8 @@ public class Game extends Application{
 			root.getChildren().add(disc);	//TODO
 		}
 	}
-	
+
 	public static boolean isTurn() {
-		System.out.println(turnTest);
 		root.setOnMouseClicked(event -> {
 			if(turnTest) {
 				turnTest = false;
@@ -55,7 +55,7 @@ public class Game extends Application{
 	}
 
 	public static void spawnDisc(int i) {
-		if(isTurn()) {
+		if(turnTest) {
 			createDisc(i, true);
 		}else {
 			createDisc(i, false);
