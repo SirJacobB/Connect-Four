@@ -6,7 +6,7 @@ import javafx.scene.shape.Circle;
 public class Disc extends Circle{
 
 	public Disc(boolean turn) {
-		this.setRadius(25);
+		this.setRadius(50);
 		if(turn) {
 			this.setFill(Color.YELLOW);
 		}else {
