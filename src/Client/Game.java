@@ -1,8 +1,6 @@
 package Client;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-
 import javafx.application.Application;
 import javafx.scene.Group;
 import javafx.scene.Scene;
@@ -94,5 +92,4 @@ public class Game extends Application{
 	public static void main(String[] args) {
 		launch(args);
 	}
-
 }
