@@ -22,8 +22,8 @@ public class ConnectingClient extends Group{
 	Color color;
 
 	Disc[][] board;
-	
-	Boolean yourTurn = true;
+
+	Boolean yourTurn = false;
 
 
 	public static void main(String[] args) {
@@ -65,13 +65,14 @@ public class ConnectingClient extends Group{
 
 					if (line.equals("YOU ARE PLAYER 1")) {
 						this.color = Color.RED;
+						this.yourTurn = true;
 					} else if (line.equals("YOU ARE PLAYER 2")) {
 						this.color = Color.YELLOW;
 					} else if (line.equals("YOU ARE SPECTATOR")) {
 						this.color = Color.TRANSPARENT;
 					}
-					
-					
+
+
 					/* If server sends a line with coordinates, client will take these coordinates and colour
 					 * discs on those coordinates for the opposite player */
 					if (line.contains("[") && line.contains("]")) {
@@ -88,22 +89,17 @@ public class ConnectingClient extends Group{
 						} else if (color.equals("YELLOW")) {
 							board[x][y].setFill(Color.YELLOW);
 						}
+					}
 
-					}
-					
-					if (checkVertical()) {
-						System.out.println("win");
-					}
-					
-					if (line.contains("your turn")) {
-						System.out.println(line);
-						yourTurn = true;
+					if (line.contains("you")) {
+						this.yourTurn = true;
+						System.out.println(this.yourTurn);
 					}
 					if (line.contains("not turn")) {
-						System.out.println(line);
-						yourTurn = false;
+						this.yourTurn = false;
+						System.out.println(this.yourTurn);
 					}
-					
+
 				} catch (IOException e) {					//If it doesn't connect
 					System.out.println("DISCONNECTED FROM SERVER.\nPRESS ENTER TO EXIT... ");
 					connection = null;
@@ -132,7 +128,8 @@ public class ConnectingClient extends Group{
 				int x = row;
 				this.getChildren().add(disc);				//Fills 2D array "board" with white discs
 
-				if (yourTurn) {			//If it is your turn, you will be allowed to place discs
+//				if (yourTurn) {			//If it is your turn, you will be allowed to place discs
+					
 					if (col == 0) {
 						disc.setOnMouseEntered(event -> {
 							if (color == Color.TRANSPARENT)
@@ -160,43 +157,48 @@ public class ConnectingClient extends Group{
 								}
 
 							}
-							
+							check();
+							yourTurn = false;
 						});
 					}
-				}	
+//				}	
 			}
 		}
-	}
-	
-	public boolean checkWin() {
-		boolean b = false;
-		if (checkVertical() || checkHorizontal()) {
-			b = true;
-		}
-		return b;
 	}
 
-	public boolean checkVertical() {
+//	public boolean checkWin() {
+//		boolean b = false;
+//		if (checkVertical() || checkHorizontal()) {
+//			b = true;
+//		}
+//		return b;
+//	}
+
+	public void check() {
 		int rCount = 0;
 		int yCount = 0;
-		boolean b = false;
-		for (int x = 0; x < 7; x++) {
-			for (int y = 5; y > 3; y--) {
-				if (board[x][y].getFill() == Color.RED) {
-					System.out.println("red");
-				}
-				else if (board[x][y].getFill() == Color.YELLOW) {
-					yCount++;
-					rCount = 0;
-				}
-				if ((rCount == 4) || (yCount == 4)) {
-					b = true;
+		for (int row = 0; row < 7; row++) {
+			for (int col = 0; col < 6; col++) {
+				for (int y = 5; y >= 0; y--) {
+					int x = row;
+					if (board[x][y].getFill() == Color.RED) {
+						rCount++;
+						yCount = 0;
+					}
+					else if (board[x][y].getFill() == Color.YELLOW) {
+						yCount++;
+						rCount = 0;
+					}
+					if ((rCount == 4) || (yCount == 4)) {
+						System.out.println("win");
+					}
 				}
 			}
 		}
-		return b;
 	}
+
 	
+
 	public boolean checkHorizontal() {
 		int rCount = 0;
 		int yCount = 0;
