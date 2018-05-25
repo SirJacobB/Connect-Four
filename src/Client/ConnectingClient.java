@@ -158,6 +158,10 @@ public class ConnectingClient extends Group{
 		int yCount = 0;
 		for (int y = 0; y < 3; y++) {
 			for (int x = 0; x < 4; x++) {
+				
+				rCount = 0;
+				yCount = 0;
+				
 				for (int z = 0; z < 4; z++) {
 				
 					
@@ -179,8 +183,17 @@ public class ConnectingClient extends Group{
 			}
 		}
 		
+		if(!(rCount == 4) || !(yCount == 4)){
+			
+			rCount = 0;
+			yCount = 0;
+		
 		for (int y = 5; y < 4; y--) {
 			for (int x = 0; x < 4; x++) {
+				
+				rCount = 0;
+				yCount = 0;
+				
 				for (int z = 0; z < 4; z++) {
 				
 					
@@ -200,6 +213,7 @@ public class ConnectingClient extends Group{
 				rCount = 0;
 				yCount = 0;
 			}
+		}
 		}
 		
 		return false;
