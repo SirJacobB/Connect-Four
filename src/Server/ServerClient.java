@@ -26,7 +26,6 @@ public class ServerClient {
 				to_client.println("YOU ARE SPECTATOR");
 			} else if (Server.clients.size() == 0) {
 				to_client.println("YOU ARE PLAYER 1");
-				to_client.println("your turn");
 				color = "RED";
 			} else {
 				to_client.println("YOU ARE PLAYER 2");
@@ -50,11 +49,11 @@ public class ServerClient {
 
 						for (ServerClient client : Server.clients) {
 
-							if (client != this) {
+							if (client != this) {			//If the other client, send info to client
 								client.sendMsg(color + "[" + x + "," + y + "]");
-								client.sendMsg("your turn");
-							} else {
-								client.sendMsg("not turn");
+								client.sendMsg("you");
+							} else {						//If this client, send info to client
+								client.sendMsg("not turn");		
 							}
 						}
 					}

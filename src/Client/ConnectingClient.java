@@ -5,8 +5,6 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintStream;
 import java.net.Socket;
-import java.util.Scanner;
-
 import javafx.scene.Group;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
@@ -249,6 +247,8 @@ public class ConnectingClient extends Group{
 		int yCount = 0;
 		boolean b = false;
 		for (int y = 5; y >= 0; y--) {
+			rCount = 0;
+			yCount = 0;
 			for (int x = 0; x < 7; x++) {
 				if (board[x][y].getFill() == Color.RED) {
 					rCount++;
